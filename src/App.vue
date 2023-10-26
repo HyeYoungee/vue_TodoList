@@ -27,6 +27,15 @@
         const index = this.todos.findIndex(todo => todo.id === id);
         this.todos[index].checked = checked;
         console.log(this.todos);
+      },
+      deleteTodo(id){
+        // window.confirm('삭제하시겠습니까?')
+        if(window.confirm('삭제하시겠습니까?')){
+          const index = this.todos.findIndex(todo => todo.id === id);
+          this.todos.splice(index, 1);
+        } else{
+          alert('취소되었습니다.');
+        }
       }
     }
   }
@@ -49,7 +58,13 @@
       >
     </div>
 
-    <Todo v-for="todo in todos" :key="todo.id" :todo="todo" @toggle-checkbox="toggleCheck"/>
+    <Todo 
+      v-for="todo in todos" 
+      :key="todo.id" 
+      :todo="todo" 
+      @toggle-checkbox="toggleCheck"
+      @click-delete="deleteTodo"
+    />
 
   </div>
 </template>
